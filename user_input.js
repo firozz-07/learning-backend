@@ -1,9 +1,10 @@
 const http = require("http");
+const fs = require("fs");
 const server = http.createServer((req, res) => {
   if (req.url === "/") {
     res.setHeader("Content-Type", "text/html");
     res.write("<html>");
-    res.write("<head><title>Complete Coding</title></head>");
+    res.write("<head><title>chitaaa</title></head>");
     res.write("<body><h1>Enter Your Details:</h1>");
     res.write('<form action="/submit-details" method="POST">');
     res.write(
@@ -21,17 +22,20 @@ const server = http.createServer((req, res) => {
     res.write("</html>");
     return res.end();
   }
-
-  res.setHeader("Content-Type", "text/html");
-  res.write("<html>");
-  res.write("<head>");
-  res.write("<title>jdkd</title>");
-  res.write("</head>");
-  res.write("<body>");
-  res.write("<h1>submission Donee !!!</h1>");
-  res.write("</>");
+   else if (req.url === "/submit-details" && req.method === "POST") {
+    fs.writeFileSync("user-detail.txt", "done!!");
+    res.statusCode = 302;
+    res.setHeader("Location", "/");
+    return res.end();
+  } else {
+    res.statusCode = 404;
+    res.setHeader("Content-Type", "text/html");
+    res.end("<h1>Not found</h1>");
+   
+  }
 });
 const PORT = 3000;
 server.listen(PORT, () => {
-  console.log("server started");
+   console.log('server is running ');
+
 });
