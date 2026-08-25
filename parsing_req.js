@@ -1,5 +1,6 @@
 const { log } = require('console');
 const http=require('http');
+const fs=require('fs');
 const { buffer } = require('stream/consumers');
 const server=http.createServer((req,res)=>{
 if (req.url === "/") {
@@ -30,7 +31,10 @@ if (req.url === "/") {
     });
     req.on('end',()=>{
       const text=Buffer.concat(body).toString();
-      console.log(text);
+      const params=new URLSearchParams(text);
+      const dataObj=Object.fromEntries(params);
+      console.log(dataObj);
+      fs.appendFileSync("user-detail.txt", JSON.stringify(dataObj)+"\n");
     })
 
     res.statusCode = 302;
