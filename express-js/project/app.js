@@ -1,13 +1,19 @@
-const http=require('http');
 const express=require('express');
+const user=require('./user');
+const sum=require('./sum');
+const substract=require('./substract');
 const app=express();
-app.get('/',(req,res,next)=>{
-  res.send('<P>welcome to the home page</p>');
+app.use(express.urlencoded({ extended: true }));
+app.use('/user',user);
+app.use('/sum',sum);
+app.use('/substract',substract);
+
+app.get('/', (req, res) => {
+    res.send(`
+        <h1>Welcome to my calculator</h1>
+        <a href='/user'>Go to /user to use the calculator</a>
+    `);
 });
 
-app.get('/submit',(req,res,next)=>{
-  res.send('<P>welcome to the submit page </p>');
-});
-
-const Port=3000;
-app.listen(Port);
+const port=3000;
+app.listen(port);
