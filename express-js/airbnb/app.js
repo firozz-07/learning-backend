@@ -1,4 +1,5 @@
 const express=require('express');
+const path=require('path');
 const host = require('./routes/host');
 const rent = require('./routes/rent');
 const submit = require('./routes/submit');
@@ -8,10 +9,12 @@ app.use("/host",host);
 app.use("/user",rent);
 app.use("/host",submit);
 app.get('/',(req,res,next)=>{
-  res.send(`<h1>Welcome to Mybnb</h1>
-  <a href="/add-bnb"> Register BNB </a><br>
-  <a href="/rent"> rent  BNB </a>`)
+  res.sendFile(path.join(__dirname,'/views','/home.html'))
 });
+
+app.use((req,res,next)=>{
+res.sendFile(path.join(__dirname,'views','404.html'))
+})
 
 const port=3000;
 app.listen(port);
