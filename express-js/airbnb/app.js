@@ -4,9 +4,9 @@ const rent = require('./routes/rent');
 const submit = require('./routes/submit');
 const app=express();
 
-app.use(host);
-app.use(rent);
-app.use(submit);
+app.use("/host",host);
+app.use("/user",rent);
+app.use("/host",submit);
 app.get('/',(req,res,next)=>{
   res.send(`<h1>Welcome to Mybnb</h1>
   <a href="/add-bnb"> Register BNB </a><br>
