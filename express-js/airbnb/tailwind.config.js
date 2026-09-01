@@ -1,9 +1,12 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ["./views/*.html"],
+  content: ["./views/**/*.{html,ejs}"],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        airbnb: "#FF385C",
+      },
+    },
   },
   plugins: [],
 }
-
