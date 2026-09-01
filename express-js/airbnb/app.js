@@ -1,15 +1,17 @@
 const express=require('express');
 const path=require('path');
-const host = require('./routes/host');
+const {host,homes} = require('./routes/host');
 const rent = require('./routes/rent');
 const submit = require('./routes/submit');
 const rootDir = require("./utils/pathUtils");
 const app=express();
+app.use(express.urlencoded());
 app.use(express.static(path.join(rootDir, 'public')))
 app.use("/host",host);
 app.use("/user",rent);
 app.use("/host",submit);
 app.get('/',(req,res,next)=>{
+  console.log('homes',homes);
   res.sendFile(path.join(__dirname,'/views','/home.html'))
 });
 
