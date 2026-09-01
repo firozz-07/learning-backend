@@ -1,8 +1,9 @@
 const express=require('express');
 const path=require('path');
+const {homes}=require('../routes/submit');
 const rent=express.Router();
 rent.get('/rent',(req,res,next)=>{
-res.sendFile(path.join(__dirname,'..','/views','rent.html'))
+res.render('rent',{homes});
 });
 
 
