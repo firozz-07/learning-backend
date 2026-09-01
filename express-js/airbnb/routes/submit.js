@@ -3,7 +3,12 @@ const path=require('path');
 const submit=express.Router();
 const homes=[];
 submit.post('/submit',(req,res,next)=>{
-  homes.push(req.body.housename);
+  const home = {
+        housename: req.body.housename,
+        price: req.body.price,
+        location:req.body.location
+    };
+  homes.push(home);
 res.sendFile(path.join(__dirname,'..','views','submit.html'))
 });
 module.exports={homes:homes,submit:submit};
