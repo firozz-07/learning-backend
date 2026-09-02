@@ -6,7 +6,8 @@ submit.post('/submit',(req,res,next)=>{
   const home = {
         housename: req.body.housename,
         price: req.body.price,
-        location:req.body.location
+        location:req.body.location,
+        theme:req.body.theme
     };
   homes.push(home);
 res.sendFile(path.join(__dirname,'..','views','submit.html'))
