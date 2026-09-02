@@ -13,7 +13,6 @@ app.use("/host",host);
 app.use("/user",rent);
 app.use("/host",submit);
 app.get('/',(req,res,next)=>{
-  console.log('homes',homes);
   res.sendFile(path.join(__dirname,'views','/home.html'))
 });
 
