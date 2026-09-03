@@ -10,6 +10,6 @@ submit.post('/submit',(req,res,next)=>{
         theme:req.body.theme
     };
   homes.push(home);
-res.sendFile(path.join(__dirname,'..','views','submit.html'))
+res.render('submit')
 });
 module.exports={homes:homes,submit:submit};
