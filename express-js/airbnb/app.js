@@ -3,6 +3,7 @@ const path=require('path');
 const {host} = require('./routes/host');
 const {homes,submit} = require('./routes/submit');
 const rent = require('./routes/rent');
+const favourites = require('./routes/favourites');
 const myHomes = require('./routes/myHomes');
 const myBookings = require('./routes/myBookings');
 const rootDir = require("./utils/pathUtils");
@@ -15,6 +16,7 @@ app.use("/host",host);
 app.use("/user",rent);
 app.use("/host",submit);
 app.use('/host',myHomes);
+app.use('/host',favourites);
 app.use('/host',myBookings);
 app.get('/',(req,res,next)=>{
   res.render('home',{homes});
