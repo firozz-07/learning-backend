@@ -7,7 +7,8 @@ submit.post('/submit',(req,res,next)=>{
         housename: req.body.housename,
         price: req.body.price,
         location:req.body.location,
-        theme:req.body.theme
+        theme:req.body.theme,
+        id:Math.random()
     };
   homes.push(home);
 res.render('submit')
