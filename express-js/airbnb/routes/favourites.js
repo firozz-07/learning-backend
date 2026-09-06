@@ -1,12 +1,8 @@
 const express=require('express');
 const { homes } = require('./submit');
 const { favourite } = require('./host');
+const { Getfav } = require('../controllers/controllers');
 const favourites=express.Router();
 
-favourites.get('/favourites',(req,res,next)=>{
-const favHome=homes.filter(home=>
-  favourite.includes(home.id)
-);
-res.render('favourites',{favHome});
-});
+favourites.get('/favourites',Getfav);
 module.exports=favourites;

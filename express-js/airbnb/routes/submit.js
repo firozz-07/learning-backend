@@ -1,16 +1,9 @@
 const express=require('express');
-const path=require('path');
+const homes = require('../data/data');
+const {submits}=require('../controllers/controllers');
 const submit=express.Router();
-const homes=[];
-submit.post('/submit',(req,res,next)=>{
-  const home = {
-        housename: req.body.housename,
-        price: req.body.price,
-        location:req.body.location,
-        theme:req.body.theme,
-        id:Math.random()
-    };
-  homes.push(home);
-res.render('submit')
-});
-module.exports={homes:homes,submit:submit};
+submit.post('/submit',submits);
+module.exports = {
+  homes: homes,
+  submit: submit
+};

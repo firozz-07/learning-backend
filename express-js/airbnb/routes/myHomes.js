@@ -1,9 +1,7 @@
 const express=require('express');
-const {homes}=require('./submit');
+const {myHome}=require('../controllers/controllers');
 const myHomes=express.Router();
-myHomes.get('/myHomes',(req,res,next)=>{
-res.render('myHomes',{homes});
-});
+myHomes.get('/myHomes',myHome);
 
 
 module.exports=myHomes;
