@@ -30,6 +30,6 @@ res.sendFile(path.join(__dirname,'views','404.html'))
 
 
 const port=3001;
-mongoConnect(client=>{
+mongoConnect(()=>{
 app.listen(port);
 })

@@ -8,8 +8,6 @@ const mongoClient = mongodb.MongoClient;
 
 const mongo_URL = process.env.MONGODB_URI;
 
-let _db;
-
 const mongoConnect = (callback) => {
   mongoClient.connect(mongo_URL).then(client => {
     console.log('MongoDB connected');
@@ -20,8 +18,5 @@ const mongoConnect = (callback) => {
   });
 };
 
-const getdb = () => {
-  return _db;
-};
 
-module.exports = mongoConnect;
+module.exports=mongoConnect;

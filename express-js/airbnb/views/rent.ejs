@@ -18,7 +18,7 @@
       <div class="flex gap-3">
         <a href="/user/rent" class="rounded-full px-4 py-2 text-sm font-medium text-stone-700 hover:bg-stone-100">Rent</a>
         <a href="/host/add-bnb" class="rounded-full bg-airbnb px-4 py-2 text-sm font-semibold text-white hover:bg-rose-600">Add Home</a>
-        <a href="/host/Favourites" class="rounded-full bg-airbnb px-4 py-2 text-sm font-semibold text-white hover:bg-rose-600">Favourites</a>
+        <a href="/host/favourites" class="rounded-full bg-airbnb px-4 py-2 text-sm font-semibold text-white hover:bg-rose-600">Favourites</a>
         <a href="/host/myHomes" class="rounded-full bg-airbnb px-4 py-2 text-sm font-semibold text-white hover:bg-rose-600">MY Home-List</a>
         <a href="/host/myBookings" class="rounded-full bg-airbnb px-4 py-2 text-sm font-semibold text-white hover:bg-rose-600">-my bookings</a>
       </div>
@@ -42,9 +42,9 @@
               <h2 class="text-lg font-semibold text-stone-900"><%= home.housename %></h2>
               <p class="text-base font-medium text-airbnb">Price : <%=home.price %> Rs</p>
               <p class="text-sm text-airbnb">Location : <%=home.location %></p>
-              <p class="text-sm text-stone-900">theme :<%=home.theme %></p>
+              <p class="text-sm text-stone-900"><%=home.description %></p>
               <p class="mt-3 text-xs font-medium uppercase tracking-wide text-green-600">Available to rent</p>
-              <button onclick="addfav('<%=home.id%>')"> Add To Favourite</button>
+              <button onclick="addfav('<%=home._id%>')"> Add To Favourite</button>
             </div>
           </li>
         <% }) %>
