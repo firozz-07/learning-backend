@@ -1,4 +1,5 @@
 const express=require('express');
+const mongoConnect=require('./utils/database');
 const path=require('path');
 const {host} = require('./routes/host');
 const {homes,submit} = require('./routes/submit');
@@ -26,5 +27,8 @@ app.use((req,res,next)=>{
 res.sendFile(path.join(__dirname,'views','404.html'))
 })
 
+
 const port=3001;
+mongoConnect(client=>{
 app.listen(port);
+})
