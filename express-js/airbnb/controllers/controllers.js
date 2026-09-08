@@ -89,6 +89,7 @@ exports.submits=async(req,res,next)=>{
             housename: req.body.housename,
             price: Number(req.body.price),
             location: req.body.location,
+            image: req.body.image,
             description: req.body.description
         };
 
