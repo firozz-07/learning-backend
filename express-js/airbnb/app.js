@@ -1,3 +1,4 @@
+require('dotenv').config();
 const mongoose=require('mongoose');
 const express=require('express');
 const mongoConnect=require('./utils/database');
@@ -29,7 +30,7 @@ res.sendFile(path.join(__dirname,'views','404.html'))
 })
 
 const port=3001;
-mongoose.connect("mongodb+srv://firozz0007_db_user:0007firozz@airbnb.wrw4gek.mongodb.net/?appName=AirBNB").then(()=>{
+mongoose.connect(process.env.MONGODB_URI).then(()=>{
   console.log("MongoDB connected");
 app.listen(port);
 })
