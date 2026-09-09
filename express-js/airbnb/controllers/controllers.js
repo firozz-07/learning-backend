@@ -25,6 +25,20 @@ exports.favourites = (req, res, next) => {
       res.status(500).send("Error adding favourite");
     });
 };
+exports.removeFavourite = async (req, res) => {
+  try {
+    const homeId = req.params.id;
+
+    await Favourite.findOneAndDelete({
+      homeId: homeId
+    });
+
+    res.redirect('/rent');
+  } catch (err) {
+    console.log(err);
+    res.status(500).send("Unable to remove favourite");
+  }
+};
 
 exports.Getfav = (req, res, next) => {
   Favourite.find({})

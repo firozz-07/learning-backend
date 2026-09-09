@@ -5,6 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Listing added</title>
   <link rel="stylesheet" href="/output.css">
+  <script>
+     const removefav=(id)=>{
+      fetch(`/host/favourites/${id}`,{method:'DELETE'});
+    }
+  </script>
 </head>
 <body class="min-h-screen bg-stone-50 text-stone-800">
   <header class="border-b border-stone-200 bg-white">
@@ -42,7 +47,7 @@
               <p class="text-sm text-airbnb">Location : <%=home.location %></p>
               <p class="text-sm text-stone-900"><%=home.description %></p>
               <p class="mt-3 text-xs font-medium uppercase tracking-wide text-green-600">Available to rent</p>
-              <button onclick="addfav('<%=home._id%>')" class="mt-3 w-full rounded-full border border-airbnb px-4 py-2 text-sm font-semibold text-airbnb transition hover:bg-rose-50">Add to favourite</button>
+              <button onclick="removefav('<%=home._id%>')" class="mt-3 w-full rounded-full border border-airbnb px-4 py-2 text-sm font-semibold text-airbnb transition hover:bg-rose-50">remove from  favourite</button>
             </div>
           </li>
         <% }) %>

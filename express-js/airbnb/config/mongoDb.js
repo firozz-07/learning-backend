@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const dns = require('dns');
 dns.setServers(['8.8.8.8', '1.1.1.1']);
 
-const mongodb = require('mongodb');
+// const mongodb = require('mongodb');
 // const mongoClient = mongodb.MongoClient;
 
 const mongo_URL = process.env.MONGODB_URI;
