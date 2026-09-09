@@ -1,4 +1,4 @@
-
+const mongoose=require('mongoose');
 const express=require('express');
 const mongoConnect=require('./utils/database');
 const path=require('path');
@@ -28,8 +28,9 @@ app.use((req,res,next)=>{
 res.sendFile(path.join(__dirname,'views','404.html'))
 })
 
-
 const port=3001;
-mongoConnect(()=>{
+mongoose.connect("mongodb+srv://firozz0007_db_user:0007firozz@airbnb.wrw4gek.mongodb.net/?appName=AirBNB").then(()=>{
+  console.log("MongoDB connected");
 app.listen(port);
 })
+
