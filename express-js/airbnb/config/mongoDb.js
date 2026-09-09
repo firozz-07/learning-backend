@@ -1,12 +1,22 @@
-const { MongoClient } = require("mongodb");
+require('dotenv').config();
+const mongoose = require("mongoose");
+const dns = require('dns');
+dns.setServers(['8.8.8.8', '1.1.1.1']);
 
-const client = new MongoClient(process.env.MONGODB_URI);
+const mongodb = require('mongodb');
+// const mongoClient = mongodb.MongoClient;
 
-async function connectDB() {
-  await client.connect();
-  console.log("MongoDB connected");
+const mongo_URL = process.env.MONGODB_URI;
 
-  return client.db("airbnb");
-}
+const mongoConnect = (callback) => {
+  mongoose.connect(mongo_URL).then(client => {
+    console.log('MongoDB connected');
+    _db = client.db('airbnb');
+    callback();
+  }).catch(err => {
+    console.log('MongoDB connection error:', err);
+  });
+};
 
-module.exports = connectDB;
+
+module.exports=mongoConnect;

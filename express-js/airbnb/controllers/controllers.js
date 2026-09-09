@@ -1,67 +1,57 @@
-const homes = require('../data/data');
-const connectDB = require("../config/mongoDb");
-const { ObjectId } = require("mongodb");
-
+const homes = require("../data/data");
+const Home = require("../models/home");
+const Favourite = require("../models/favourite");
+const mongoose=require('mongoose');
 exports.addbnb=(req,res,next)=>{
 res.render('host');
 };
 
 exports.favourites = (req, res, next) => {
 
-    const houseId = new ObjectId(req.params.id);
+  const houseId = req.params.id;
 
-    connectDB()
-        .then(db => {
-            return db.collection("favourites").insertOne({
-                homeId: houseId
-            });
-        })
-        .then(() => {
-            console.log("Added to favourites");
-            res.redirect("/rent");
-        })
-        .catch(error => {
-            console.log(error);
-            res.status(500).send("Error adding favourite");
-        });
+  const favourite = new Favourite({
+    homeId: houseId
+  });
+
+  favourite
+    .save()
+    .then(() => {
+      console.log("Added to favourites");
+      res.redirect("/rent");
+    })
+    .catch(error => {
+      console.log(error);
+      res.status(500).send("Error adding favourite");
+    });
 };
 
 exports.Getfav = (req, res, next) => {
-    connectDB()
-        .then(db => {
-            return db.collection("favourites").find({}).toArray();
-        })
-        .then(favourites => {
+  Favourite.find({})
+    .then(favourites => {
 
-            const homeIds = favourites.map(fav => fav.homeId);
+      const homeIds = favourites.map(fav => fav.homeId);
 
-            return connectDB()
-                .then(db => {
-                    return db.collection("homes")
-                        .find({
-                            _id: { $in: homeIds }
-                        })
-                        .toArray();
-                });
-        })
-        .then(favHome => {
-            res.render("favourites", { favHome });
-        })
-        .catch(error => {
-            console.log(error);
-            res.status(500).send("Error fetching favourites");
-        });
+      return Home.find({
+        _id: { $in: homeIds }
+      });
+    })
+    .then(favHome => {
+      res.render("favourites", { favHome });
+    })
+    .catch(error => {
+      console.log(error);
+      res.status(500).send("Error fetching favourites");
+    });
 };
 
 
 exports.myBooking=(req,res,next)=>{
 res.render('myBookings');
 }
+
 exports.myHome = (req, res, next) => {
-    connectDB()
-        .then(db => {
-            return db.collection("homes").find({}).toArray();
-        })
+   Home.find({})
         .then(homes => {
             res.render("myHomes", { homes });
         })
@@ -71,35 +61,37 @@ exports.myHome = (req, res, next) => {
         });
 };
 
-exports.rents=(req,res,next)=>{
-  connectDB()
-  .then(db=>{
-    return db.collection("homes").find({}).toArray();
-  })
-  .then(homes=>{
-res.render('rent',{homes});
+exports.rents = (req, res, next) => {
 
-  })
-}
-exports.submits=async(req,res,next)=>{
+  Home.find({})
+    .then(homes => {
+      res.render("rent", { homes });
+    })
+    .catch(error => {
+      console.log(error);
+      res.status(500).send("Error fetching homes");
+    });
+
+};
+exports.submits = async (req, res, next) => {
   try {
-        const db = await connectDB();
 
-        const home = {
-            housename: req.body.housename,
-            price: Number(req.body.price),
-            location: req.body.location,
-            image: req.body.image,
-            description: req.body.description
-        };
+    const home = new Home({
+      housename: req.body.housename,
+      price: Number(req.body.price),
+      location: req.body.location,
+      image: req.body.image,
+      description: req.body.description
+    });
 
-        await db.collection("homes").insertOne(home);
+    await home.save();
 
-        console.log("Home saved to MongoDB");
+    console.log("Home saved to MongoDB");
 
-        res.render("submit");
-    } catch (error) {
-        console.log(error);
-        res.status(500).send("Error saving home");
-    }
-}
+    res.render("submit");
+
+  } catch (error) {
+    console.log(error);
+    res.status(500).send("Error saving home");
+  }
+};

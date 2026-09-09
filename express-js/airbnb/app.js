@@ -1,7 +1,7 @@
 require('dotenv').config();
 const mongoose=require('mongoose');
 const express=require('express');
-const mongoConnect=require('./utils/database');
+const mongoConnect=require('./config/mongoDb');
 const path=require('path');
 const {host} = require('./routes/host');
 const {homes,submit} = require('./routes/submit');
